@@ -10,8 +10,16 @@
 	<script type="text/javascript" src="src/actions.js"></script>
 
 	<script type="text/javascript">
+		const dummy = "{\"Cash\":[\"Asset\",\"40\"],\"Loan from Todd\":[\"Debt\",\"-20\"],\"Gold\":[\"Asset\",\"100\"],\"Rare stamps\":[\"Asset\",\"35\"],\"Load from bank\":[\"Debt\",\"-200\"],\"Loan to Ed\":[\"Debt\",\"60\"]}";
+
 		// Initialize data if none
-		if (!localStorage.db) {
+		if (!localStorage.db ||
+			localStorage.db == dummy ||
+			localStorage.db == "{}") {
+			if (location.hash == "#example") {
+				localStorage.db = dummy;
+			}
+
 			localStorage.setItem("db", JSON.stringify({}));
 		}
 
