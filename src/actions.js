@@ -1,5 +1,10 @@
 // Parse data from localStorage
 function local_storage() {
+	// Initialize data if none
+	if (!localStorage.db) {
+		localStorage.setItem("db", JSON.stringify({}));
+	}
+	
 	return JSON.parse(localStorage.db);
 }
 
