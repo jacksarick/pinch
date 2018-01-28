@@ -29,7 +29,7 @@
 <body>
 	<center>
 		<h1>Budget</h1>
-		<h2 id="demo-warn">Data will NOT be saved in demo mode</h2>
+		<h2 id="demo-warn">Data will NOT be saved in demo mode. Click <a href="/">here</a> to exit</h2>
 
 		<input type="input" placeholder="Search..." onkeypress="fuzzy_search(self);" disabled="">
 
@@ -93,6 +93,9 @@
 			for (var key in data) {
 				table.append(format(key, ...data[key]))
 			}
+
+			// Filter
+			filter();
 		}
 
 		// Inital draw
