@@ -15,7 +15,6 @@
 		if (location.hash == "#demo") {
 			localStorage.backup = localStorage.db;
 			localStorage.db = dummy;
-			$("#demo-warn").show();
 		}
 
 		else {
@@ -30,7 +29,7 @@
 <body>
 	<center>
 		<h1>Budget</h1>
-		<h2 id="demo-warn" style="display: none;">Data will NOT be saved in demo mode</h2>
+		<h2 id="demo-warn">Data will NOT be saved in demo mode</h2>
 
 		<input type="input" placeholder="Search..." onkeypress="fuzzy_search(self);" disabled="">
 
@@ -68,6 +67,10 @@
 	</tbody></table>
 
 	<script type="text/javascript">
+		if (location.hash != "#example") {
+			$("#demo-warn").$.remove();
+		}
+
 		// Draw table data
 		function redraw() {
 			const table = $("#data");
