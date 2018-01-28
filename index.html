@@ -12,6 +12,18 @@
 	<script type="text/javascript">
 		const dummy = "{\"Cash\":[\"Asset\",\"40\"],\"Loan from Todd\":[\"Debt\",\"-20\"],\"Gold\":[\"Asset\",\"100\"],\"Rare stamps\":[\"Asset\",\"35\"],\"Load from bank\":[\"Debt\",\"-200\"],\"Loan to Ed\":[\"Debt\",\"60\"]}";
 
+		if (location.hash == "#demo") {
+			localStorage.backup = localStorage.db;
+			localStorage.db = dummy
+		}
+
+		else {
+			if (localStorage.backup) {
+				localStorage.db = localStorage.backup;
+				delete localStorage.backup;
+			}
+		}
+
 	</script>
 </head>
 <body>
