@@ -27,11 +27,14 @@
 	</center>
 	
 	<table><tbody id="data">
+		<!-- Table Headers -->
 		<tr>
 			<th>Name</th>
 			<th>Type</th>
 			<th>Value</th>
 		</tr>
+
+		<!-- New Entry -->
 		<tr>
 			<td>New Entry: <input id="new-name" placeholder="Name..."></td>
 			<td>
@@ -39,9 +42,16 @@
 				<input type="radio" name="new-type" value="Debt"> Debt
 			</td>
 			<td>
-				<input type="number" id="new-value" value="10">
+				$<input type="number" id="new-value" placeholder="10..">
 				<button onclick="new_record(); redraw();">Add</button>
 			</td>
+		</tr>
+
+		<!-- Overview -->
+		<tr>
+			<td></td>
+			<td></td>
+			<td>Total: <span id="total-value"></span></td>
 		</tr>
 	</tbody></table>
 
@@ -49,13 +59,21 @@
 		function redraw() {
 			const table = $("#data");
 
+			// Drop current table
 			items = [...document.getElementsByClassName("entry")]
-	
 			for (var i = items.length - 1; i >= 0; i--) {
 				items[i].remove();
 			}
 
-			const data = JSON.parse(localStorage.db);
+			// Pull data from localStorage
+			const data = local_storage();
+
+			// Insert total value row
+			const value = Object.values(data)
+				.reduce((a, b) => a + parseInt(b[1]), 0);
+			$("#total-value").html("$" + value)
+
+			// Insert all data
 			for (var key in data) {
 				table.append(format(key, ...data[key]))
 			}

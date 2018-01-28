@@ -1,3 +1,7 @@
+function local_storage() {
+	return JSON.parse(localStorage.db);
+}
+
 function fuzzy_search(search) {
 	console.log(search);
 }
@@ -21,13 +25,13 @@ function filter() {
 
 
 function update(key, value){
-	var data = JSON.parse(localStorage.db);
+	var data = local_storage();
 	data[key] = value;
 	localStorage.db = JSON.stringify(data);
 }
 
 function remove(key){
-	var data = JSON.parse(localStorage.db);
+	var data = local_storage();
 	delete data[key];
 	localStorage.db = JSON.stringify(data);
 }
@@ -41,7 +45,7 @@ function format(name, type, value) {
 				<td>${name}</td>
 				<td>${type}</td>
 				<td>
-					<input type="number" value="${value}" onchange="update('${name}', ['${type}', this.value]); redraw();">
+					$<input type="number" value="${value}" onchange="update('${name}', ['${type}', this.value]); redraw();">
 					<button onclick="remove('${name}'); redraw();">Remove</button>
 				</td>
 			</tr>`
