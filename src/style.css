@@ -1,0 +1,82 @@
+/* Basic CSS stylesheet from https://gist.github.com/jacksarick/9fab0439a0b5a043cf461f616195cd84 */
+
+body {
+    margin: 0 auto;
+    max-width: 50em;
+    line-height: 1.5;
+    padding: 4em 1em;
+    color: #555;
+    font-family: "Helvetica", "Arial", sans-serif;
+    margin-top: 1em;
+    padding-top: 1em;
+}
+
+h1, h2, strong {
+    color: #333;
+}
+
+code, pre {
+    background: #eee;
+}
+
+code {
+    padding: 2px 4px;
+    vertical-align: text-bottom;
+}
+
+pre {
+    padding: 1em;
+}
+
+table {
+    width: 100%;
+}
+td, th {
+    width: 33%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+
+
+input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 2em;
+    height: 1em;
+    background: grey;
+    display: block;
+    border-radius: 1em;
+    position: relative;
+}
+
+label:after {
+    content: '';
+    position: absolute;
+    top: .05em;
+    left: .05em;
+    width: .9em;
+    height: .9em;
+    background: #fff;
+    border-radius: .9em;
+    transition: 0.3s;
+}
+
+input:checked + label {
+    background: #bada55;
+}
+
+input:checked + label:after {
+    left: calc(100% - .05em);
+    transform: translateX(-100%);
+}
+
+label:active:after {
+    width: 1.3em;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pinch</title>
+
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="src/style.css">
+	<script type="text/javascript" src="src/jackQuery.js"></script>
+	<script type="text/javascript" src="src/actions.js"></script>
+</head>
+<body>
+	<center>
+		<h1>Budget</h1>
+
+		<input type="input" placeholder="Search..." onkeypress="fuzzy_search(self);">
+
+		<input type="checkbox" onchange="filter('Assets');"> Assets
+		<input type="checkbox" onchange="filter('Debts');"> Debts
+	</center>
+	
+	<table id="data">
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Value</th>
+		</tr>
+		<tr>
+			<td><input id="new-name" placeholder="Name..."></td>
+			<td>
+				<input type="radio" id="new-type" checked> Asset
+				<input type="radio" id="new-type"> Debt
+			</td>
+			<td>
+				<input type="number" id="new-value" value="10">
+				<button onclick="new_record();">Add</button>
+			</td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		var data = {
+			"Cash": ["Asset", 20],
+			"Bud": ["Asset", 50],
+			"Bank": ["Debt", -30]
+		};
+
+		const table = $("#data");
+		for (var key in data) {
+			table.append(format(key, ...data[key]))
+		}
+	</script>
+
+</body>
+</html>
