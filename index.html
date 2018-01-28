@@ -8,47 +8,60 @@
 	<link rel="stylesheet" type="text/css" href="src/style.css">
 	<script type="text/javascript" src="src/jackQuery.js"></script>
 	<script type="text/javascript" src="src/actions.js"></script>
+
+	<script type="text/javascript">
+		if (!localStorage.db) {
+			localStorage.setItem("db", JSON.stringify({}));
+		}
+
+	</script>
 </head>
 <body>
 	<center>
 		<h1>Budget</h1>
 
-		<input type="input" placeholder="Search..." onkeypress="fuzzy_search(self);">
+		<input type="input" placeholder="Search..." onkeypress="fuzzy_search(self);" disabled="">
 
-		<input type="checkbox" onchange="filter('Assets');"> Assets
-		<input type="checkbox" onchange="filter('Debts');"> Debts
+		<input class="filter" type="checkbox" value="Asset" onchange="filter();" checked> Assets
+		<input class="filter" type="checkbox" value="Debt" onchange="filter();" checked> Debts
 	</center>
 	
-	<table id="data">
+	<table><tbody id="data">
 		<tr>
 			<th>Name</th>
 			<th>Type</th>
 			<th>Value</th>
 		</tr>
 		<tr>
-			<td><input id="new-name" placeholder="Name..."></td>
+			<td>New Entry: <input id="new-name" placeholder="Name..."></td>
 			<td>
-				<input type="radio" id="new-type" checked> Asset
-				<input type="radio" id="new-type"> Debt
+				<input type="radio" name="new-type" value="Asset" checked> Asset
+				<input type="radio" name="new-type" value="Debt"> Debt
 			</td>
 			<td>
 				<input type="number" id="new-value" value="10">
-				<button onclick="new_record();">Add</button>
+				<button onclick="new_record(); redraw();">Add</button>
 			</td>
 		</tr>
-	</table>
+	</tbody></table>
 
 	<script type="text/javascript">
-		var data = {
-			"Cash": ["Asset", 20],
-			"Bud": ["Asset", 50],
-			"Bank": ["Debt", -30]
-		};
+		function redraw() {
+			const table = $("#data");
 
-		const table = $("#data");
-		for (var key in data) {
-			table.append(format(key, ...data[key]))
+			items = [...document.getElementsByClassName("entry")]
+	
+			for (var i = items.length - 1; i >= 0; i--) {
+				items[i].remove();
+			}
+
+			const data = JSON.parse(localStorage.db);
+			for (var key in data) {
+				table.append(format(key, ...data[key]))
+			}
 		}
+
+		redraw();
 	</script>
 
 </body>

@@ -21,11 +21,19 @@ function filter() {
 
 
 function update(key, value){
-	console.log({key: value});
+	var data = JSON.parse(localStorage.db);
+	data[key] = value;
+	localStorage.db = JSON.stringify(data);
+}
+
+function remove(key){
+	var data = JSON.parse(localStorage.db);
+	delete data[key];
+	localStorage.db = JSON.stringify(data);
 }
 
 function new_record(){
-	update($("#new-name").value(), [$("#new-type").value(), $("#new-value").value()])
+	update($("#new-name").value(), [document.querySelector('input[name=new-type]:checked').value, $("#new-value").value()]);
 }
 
 function format(name, type, value) {
@@ -33,8 +41,8 @@ function format(name, type, value) {
 				<td>${name}</td>
 				<td>${type}</td>
 				<td>
-					<input type="number" value="${value}" onchange="update(${name}, [${type}, ${value}]);">
-					<button onclick="remove(${name});">Remove</button>
+					<input type="number" value="${value}" onchange="update('${name}', ['${type}', this.value]); redraw();">
+					<button onclick="remove('${name}'); redraw();">Remove</button>
 				</td>
 			</tr>`
 }
