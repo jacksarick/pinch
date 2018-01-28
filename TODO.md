@@ -1,0 +1,4 @@
+- [ ] Better Interface
+- [ ] Overviews (Total Debt, total value, etc.)
+- [ ] Combinations (Convert debt to asset)
+- [ ] Persistance across devices if wanted
