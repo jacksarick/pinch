@@ -1,4 +1,4 @@
 - [ ] Better Interface
 - [x] Overviews (Total Debt, total value, etc.)
 - [ ] Combinations (Convert debt to asset)
-- [ ] Persistance across devices if wanted
+- [ ] ~~Persistence across devices if wanted~~ Download/Load data from file
